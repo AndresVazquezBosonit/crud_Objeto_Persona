@@ -32,16 +32,7 @@ public class PersonController {
   // Delete Person by id
   @DeleteMapping("/{id}")
   public String deletePerson(@PathVariable long id) {
-    Optional<Persona> personaDeleted = personService.findPerson(id);
-    if (personaDeleted.isPresent()) {
-      personService.deletePerson(id);
-      return "has been deleted: "
-          + personaDeleted.get().getNombre()
-          + " from: "
-          + personaDeleted.get().getPoblacion();
-    } else {
-      return "The person does not exist";
-    }
+    return personService.deletePerson(id);
   }
   // Update Person by id in
   @PutMapping("{id}")

@@ -24,8 +24,19 @@ public class PersonService {
     return personaRepository.findAll();
   }
 
-  public void deletePerson(long id) {
-    personaRepository.deleteById(id);
+  public String deletePerson(long id) {
+    Optional<Persona> personaToDeleted = personaRepository.findById(id);
+    if (personaToDeleted.isPresent()) {
+      personaRepository.deleteById(id);
+      return "Has been deleted: "
+              + personaToDeleted.get().getNombre()
+              + " from: "
+              + personaToDeleted.get().getPoblacion()
+              + " with id: "
+              + personaToDeleted.get().getId();
+    } else {
+      return "The person does not exist";
+    }
   }
 
   public Persona updatePerson(Persona p, long id) {
